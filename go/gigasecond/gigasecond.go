@@ -5,6 +5,7 @@ import "time"
 
 const testVersion = 4
 
-func AddGigasecond(time.Time) time.Time {
-
+func AddGigasecond(t time.Time) time.Time {
+    const Gigasecond = 1000000000 * time.Second
+    return t.Add( Gigasecond )
 }
