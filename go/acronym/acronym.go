@@ -1,16 +1,30 @@
 package acronym
 
 import "strings"
+import "bytes"
 
 const testVersion = 3
 
 
 func Abbreviate(in string) string {
-    fn := func( x rune ) bool {
-        return x == ' ' || x == '-';
+
+    var prev rune
+    first := true
+
+    var out bytes.Buffer
+
+    for _, cur := range in {
+
+        beg := (prev == ' ') || (prev == '-')
+
+        if first || beg {
+            out.WriteString( strings.ToUpper( string(cur) ) )
+        }
+
+        prev = cur
+
+        first = false
     }
 
-    return strings.Join(
-        strings.FieldsFunc( in, fn),
-        "");
+    return out.String()
 }
